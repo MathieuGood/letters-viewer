@@ -5,7 +5,7 @@ import { Letter } from "../interfaces/Letter"
 import ImageActionButton from "./ImageActionButton"
 
 interface LetterImageProps {
-	selectedLetter: Letter
+	selectedLetter: Letter | null
 	selectedImageType: string
 	setSelectedImageType: React.Dispatch<React.SetStateAction<string>>
 	isTextVisible: boolean
@@ -72,7 +72,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 		console.log("Click on zoom button")
 	}
 
-	return (
+	return selectedLetter ? (
 		<div className="flex flex-col justify-end w-2/3">
 			<div className=" flex items-end justify-center">
 				<ReactCardFlip
@@ -116,7 +116,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 				/>
 			</div>
 		</div>
-	)
+	) : null
 }
 
 export default LetterImage

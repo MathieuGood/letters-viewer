@@ -1,11 +1,11 @@
 import { Letter } from "../interfaces/Letter"
 
 interface LetterTextProps {
-	selectedLetter: Letter
+	selectedLetter: Letter | null
 }
 
 const LetterText: React.FC<LetterTextProps> = ({ selectedLetter }) => {
-	return (
+	return selectedLetter ? (
 		<div className="bg-[rgba(255,255,255,0.5)] w-1/3 overflow-y-scroll p-4 rounded-lg">
 			<div className="mb-6">
 				{selectedLetter.sp} {selectedLetter.date.toString()}
@@ -18,7 +18,7 @@ const LetterText: React.FC<LetterTextProps> = ({ selectedLetter }) => {
 				))}
 			</div>
 		</div>
-	)
+	) : null
 }
 
 export default LetterText

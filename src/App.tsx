@@ -42,18 +42,16 @@ const App: React.FC = () => {
 				setIsLeftPanelVisible={setIsLeftPanelVisible}
 			/>
 
-			{selectedLetter && (
-				<>
-					<LetterImage
-						selectedLetter={selectedLetter}
-						selectedImageType={selectedImageType}
-						setSelectedImageType={setSelectedImageType}
-						isTextVisible={isTextVisisible}
-						setIsTextVisible={setIsTextVisible}
-					/>
-					{isTextVisisible && <LetterText selectedLetter={selectedLetter} />}
-				</>
-			)}
+			<>
+				<LetterImage
+					selectedLetter={selectedLetter}
+					selectedImageType={selectedImageType}
+					setSelectedImageType={setSelectedImageType}
+					isTextVisible={isTextVisisible}
+					setIsTextVisible={setIsTextVisible}
+				/>
+				{isTextVisisible && <LetterText selectedLetter={selectedLetter} />}
+			</>
 
 			{selectedLetter === null && (
 				<div className="flex flex-col gap-4 pl-48 justify-center text-5xl">
