@@ -21,7 +21,7 @@ const App: React.FC = () => {
 	}
 
 	return (
-		<div className="w-screen h-screen flex p-4 font-typerwriter pl-20 py-5 px-5">
+		<div className="w-screen h-screen flex p-5 font-typerwriter pl-20">
 			{/* Background image */}
 			<img
 				src="images/backgroundLight.png"
@@ -35,13 +35,12 @@ const App: React.FC = () => {
 					onClick={() => handleShowListButtonClick()}
 				/>
 			</div>
-			{isLeftPanelVisible && (
-				<LeftPanel
-					selectedLetterIndex={selectedLetterIndex}
-					setSelectedLetterIndex={setSelectedLetterIndex}
-					setIsLeftPanelVisible={setIsLeftPanelVisible}
-				/>
-			)}
+			<LeftPanel
+				isLeftPanelVisible={isLeftPanelVisible}
+				selectedLetterIndex={selectedLetterIndex}
+				setSelectedLetterIndex={setSelectedLetterIndex}
+				setIsLeftPanelVisible={setIsLeftPanelVisible}
+			/>
 
 			{selectedLetter && (
 				<>
