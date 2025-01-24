@@ -3,6 +3,7 @@ import LeftPanel from "./components/LeftPanel"
 import letters from "./data/letters.json"
 import LetterImage from "./components/LetterImage"
 import LetterText from "./components/LetterText"
+import HomeContent from "./components/HomeContent"
 
 const App: React.FC = () => {
 	const [selectedLetterIndex, setSelectedLetterIndex] = useState<number | null>(null)
@@ -27,6 +28,9 @@ const App: React.FC = () => {
 				src="images/backgroundLight.png"
 				className="absolute inset-0 w-full h-full object-cover -z-10"
 			/>
+
+			{selectedLetter === null && <HomeContent />}
+
 			{/* Menu icon */}
 			<div className="menu-icon absolute top-4 left-4">
 				<img
@@ -35,30 +39,24 @@ const App: React.FC = () => {
 					onClick={() => handleShowListButtonClick()}
 				/>
 			</div>
+
 			<LeftPanel
 				isLeftPanelVisible={isLeftPanelVisible}
 				selectedLetterIndex={selectedLetterIndex}
 				setSelectedLetterIndex={setSelectedLetterIndex}
 				setIsLeftPanelVisible={setIsLeftPanelVisible}
+				setIsTextVisible={setIsTextVisible}
 			/>
 
-			<>
-				<LetterImage
-					selectedLetter={selectedLetter}
-					selectedImageType={selectedImageType}
-					setSelectedImageType={setSelectedImageType}
-					isTextVisible={isTextVisisible}
-					setIsTextVisible={setIsTextVisible}
-				/>
-				{isTextVisisible && <LetterText selectedLetter={selectedLetter} />}
-			</>
+			<LetterImage
+				selectedLetter={selectedLetter}
+				selectedImageType={selectedImageType}
+				setSelectedImageType={setSelectedImageType}
+				isTextVisible={isTextVisisible}
+				setIsTextVisible={setIsTextVisible}
+			/>
 
-			{selectedLetter === null && (
-				<div className="flex flex-col gap-4 pl-48 justify-center text-5xl">
-					<p>Lettres d'André à Marthe</p>
-					<p>1950 - 1953</p>
-				</div>
-			)}
+			<LetterText isTextVisible={isTextVisisible} selectedLetter={selectedLetter} />
 		</div>
 	)
 }

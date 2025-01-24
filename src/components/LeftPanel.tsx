@@ -8,17 +8,21 @@ interface LeftPanelProps {
 	selectedLetterIndex: number | null
 	setSelectedLetterIndex: React.Dispatch<React.SetStateAction<number | null>>
 	setIsLeftPanelVisible: React.Dispatch<React.SetStateAction<boolean>>
+	setIsTextVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LeftPanel: React.FC<LeftPanelProps> = ({
 	isLeftPanelVisible,
 	setSelectedLetterIndex,
-	setIsLeftPanelVisible
+	setIsLeftPanelVisible,
+	setIsTextVisible
 }) => {
 	const handleDateClick = (index: number) => {
 		setSelectedLetterIndex(index)
 		setIsLeftPanelVisible(false)
-		// Set imageType to enveloppeRecto
+		setIsTextVisible(false)
+		// Set imageType/imageIndex to first image
+
 	}
 
 	const fallAnimationProps = useSpring({
