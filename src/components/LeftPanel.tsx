@@ -13,6 +13,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ setSelectedLetterIndex, setIsLeft
 	const handleDateClick = (index: number) => {
 		setSelectedLetterIndex(index)
 		setIsLeftPanelVisible(false)
+        // Set imageType to enveloppeRecto
 	}
 
 	const fallAnimationProps = useSpring({

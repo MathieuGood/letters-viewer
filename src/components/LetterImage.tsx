@@ -20,7 +20,6 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	setIsTextVisible
 }) => {
 	const [isEnveloppeFlipped, setIsFlippedEnveloppe] = useState(false)
-	const [selectedBgImageType, setBgSelectedImageType] = useState("")
 
 	const getLetterImageUrl = (date: string | Date, imageType: string) => {
 		return `images/letters/${date.toString()}_${imageType}.png`
@@ -31,18 +30,26 @@ const LetterImage: React.FC<LetterImageProps> = ({
 			setSelectedImageType("enveloppeRecto")
 		} else if (selectedImageType === "lettreRecto") {
 			setSelectedImageType("enveloppeOuverte")
-			setBgSelectedImageType("enveloppeRecto")
+		} else if (selectedImageType === "lettreOuverte") {
+			setSelectedImageType("lettreRecto")
+		} else if (selectedImageType === "lettreVerso") {
+			setSelectedImageType("lettreOuverte")
 		} else {
 			setIsFlippedEnveloppe(!isEnveloppeFlipped)
 		}
 	}
 
-	const handleImageClick = (imageType: string, bgImageType: string) => {
+	const handleImageClick = (imageType: string) => {
 		if (imageType === "enveloppeRecto") {
 			setSelectedImageType("enveloppeOuverte")
-		} else if (imageType === "enveloppeOuverte" && bgImageType === "") {
+		} else if (imageType === "enveloppeOuverte") {
 			setSelectedImageType("lettreRecto")
+		} else if (imageType === "lettreRecto") {
+			setSelectedImageType("lettreOuverte")
+		} else if (imageType === "lettreOuverte") {
+			setSelectedImageType("lettreVerso")
 		}
+
 		console.log(`Image type was : ${imageType}`)
 		console.log(`Image type is : ${selectedImageType}`)
 	}
@@ -66,24 +73,25 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	}
 
 	return (
-		<div className="flex flex-col justify-center w-2/3">
+		<div className="flex flex-col justify-end w-2/3">
 			<div className=" flex items-end justify-center">
 				<ReactCardFlip
 					isFlipped={isEnveloppeFlipped}
 					flipDirection="horizontal"
-					containerClassName="max-w-[600px] max-h-screen cursor-pointer">
+					containerClassName=" max-h-screen cursor-pointer">
 					<animated.div style={fallDownAnimationProps}>
 						<img
-						className="max-w-[500px] h-auto"
+							className=" max-h-[calc(100vh-10rem)]"
 							src={getLetterImageUrl(selectedLetter.date, selectedImageType)}
 							onClick={() => {
-								handleImageClick(selectedImageType, selectedBgImageType)
+								handleImageClick(selectedImageType)
 							}}
 						/>
 					</animated.div>
 
 					<div>
 						<img
+							className=" max-h-[calc(100vh-10rem)]"
 							src={getLetterImageUrl(selectedLetter.date, "enveloppeVerso")}
 						/>
 					</div>
@@ -102,7 +110,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 					onClick={() => handleZoomButtonClick()}
 				/>
 				<ImageActionButton
-					label="Ouvrir texte"
+					label="Transcription"
 					imageUrl="vectors/text.svg"
 					onClick={() => handleTextVisibleButtonClick()}
 				/>

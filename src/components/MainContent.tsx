@@ -33,7 +33,12 @@ const MainContent: React.FC<MainContentProps> = ({ selectedLetterIndex, letters 
 				</>
 			)}
 
-			{selectedLetter === null && <p className="bg-white">Aucune lettre sélectionnée</p>}
+			{selectedLetter === null && (
+				<div className="flex flex-col gap-4 justify-center text-5xl">
+					<p>Lettres d'André à Marthe</p>
+					<p>1950 - 1953</p>
+				</div>
+			)}
 		</div>
 	)
 }
