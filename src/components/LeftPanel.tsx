@@ -39,7 +39,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ setSelectedLetterIndex, setIsLeft
 				<>
 					{yearTitle}
 					<li
-						className="cursor-pointer ml-2"
+						className="cursor-pointer ml-2 hover:font-typewriterblack hover:text-neutral-700"
 						key={index}
 						onClick={() => handleDateClick(index)}>
 						{formatDateToFrench(letter.date.toString())}
@@ -51,7 +51,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ setSelectedLetterIndex, setIsLeft
 
 	return (
 		<animated.div
-			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 p-4 z-50 absolute top-32 left-6 animate-fade-in"
+			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-32 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll"
 			style={fallAnimationProps}>
 			<ul>{dateListEntries(letters)}</ul>
 		</animated.div>

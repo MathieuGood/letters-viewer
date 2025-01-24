@@ -23,6 +23,7 @@ const App: React.FC = () => {
 				src="images/backgroundLight.png"
 				className="absolute inset-0 w-full h-full object-cover -z-10"
 			/>
+      {/* Folder image */}
 			<div className="">
 				<img
 					src="images/books.png"
