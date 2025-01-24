@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "Atalon";
+		src: url("/fonts/atalon.regular.otf") format("opentype");
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "JMH Typewriter";
+		src: url("/fonts/JMH_Typewriter.otf") format("opentype");
+		font-weight: normal;
+		font-style: normal;
+	}
+
+
+	@font-face {
+		font-family: "JMH Typewriter Black";
+		src: url("/fonts/JMH_Typewriter-Black.otf") format("opentype");
+		font-weight: normal;
+		font-style: normal;
+	}
+
+
+}
