@@ -8,50 +8,47 @@ interface LetterImageProps {
 	selectedLetter: Letter | null
 	selectedImageType: string
 	setSelectedImageType: React.Dispatch<React.SetStateAction<string>>
+	selectedPhotoIndex: number
+	setSelectedPhotoIndex: React.Dispatch<React.SetStateAction<number>>
 	isTextVisible: boolean
 	setIsTextVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LetterImage: React.FC<LetterImageProps> = ({
 	selectedLetter,
-	selectedImageType,
-	setSelectedImageType,
+	selectedPhotoIndex,
+	setSelectedPhotoIndex,
 	isTextVisible,
 	setIsTextVisible
 }) => {
 	const [isEnveloppeFlipped, setIsFlippedEnveloppe] = useState(false)
 
-	const getLetterImageUrl = (date: string | Date, imageType: string) => {
-		return `images/letters/${date.toString()}_${imageType}.png`
+	const getSelectedLetterImageUrl = (selectedPhotoIndex: number) => {
+		if (
+			selectedLetter?.images &&
+			selectedLetter.images?.length > 0 &&
+			selectedLetter.images[selectedPhotoIndex].type
+		) {
+			const selectedLetterDate = selectedLetter.date.toString()
+			const imageType = selectedLetter.images[selectedPhotoIndex].type
+			return `images/letters/${selectedLetterDate}_${imageType}.png`
+		} else {
+			return ""
+		}
 	}
 
 	const handleFlipButtonClick = () => {
-		if (selectedImageType === "enveloppeOuverte") {
-			setSelectedImageType("enveloppeRecto")
-		} else if (selectedImageType === "lettreRecto") {
-			setSelectedImageType("enveloppeOuverte")
-		} else if (selectedImageType === "lettreOuverte") {
-			setSelectedImageType("lettreRecto")
-		} else if (selectedImageType === "lettreVerso") {
-			setSelectedImageType("lettreOuverte")
-		} else {
+		if (selectedPhotoIndex === 0 || selectedPhotoIndex === 1) {
 			setIsFlippedEnveloppe(!isEnveloppeFlipped)
 		}
 	}
 
-	const handleImageClick = (imageType: string) => {
-		if (imageType === "enveloppeRecto") {
-			setSelectedImageType("enveloppeOuverte")
-		} else if (imageType === "enveloppeOuverte") {
-			setSelectedImageType("lettreRecto")
-		} else if (imageType === "lettreRecto") {
-			setSelectedImageType("lettreOuverte")
-		} else if (imageType === "lettreOuverte") {
-			setSelectedImageType("lettreVerso")
+	const handleImageClick = () => {
+		if (selectedPhotoIndex === 0) {
+			setSelectedPhotoIndex(2)
+		} else if (selectedPhotoIndex === 2) {
+			setSelectedPhotoIndex(3)
 		}
-
-		console.log(`Image type was : ${imageType}`)
-		console.log(`Image type is : ${selectedImageType}`)
 	}
 
 	const fallDownAnimationProps = useSpring({
@@ -72,6 +69,22 @@ const LetterImage: React.FC<LetterImageProps> = ({
 		console.log("Click on zoom button")
 	}
 
+	const handlePrevPhotoClick = () => {
+		if (selectedPhotoIndex > 3) {
+			setSelectedPhotoIndex(selectedPhotoIndex - 1)
+		}
+	}
+
+	const handleNextPhotoClick = () => {
+		if (
+			selectedLetter?.images &&
+			selectedPhotoIndex < selectedLetter.images.length - 1 &&
+			selectedPhotoIndex > 2
+		) {
+			setSelectedPhotoIndex(selectedPhotoIndex + 1)
+		}
+	}
+
 	return selectedLetter ? (
 		<div className="flex flex-col justify-end w-2/3">
 			<div className=" flex items-end justify-center">
@@ -82,9 +95,9 @@ const LetterImage: React.FC<LetterImageProps> = ({
 					<animated.div style={fallDownAnimationProps}>
 						<img
 							className=" max-h-[calc(100vh-10rem)]"
-							src={getLetterImageUrl(selectedLetter.date, selectedImageType)}
+							src={getSelectedLetterImageUrl(selectedPhotoIndex)}
 							onClick={() => {
-								handleImageClick(selectedImageType)
+								handleImageClick()
 							}}
 						/>
 					</animated.div>
@@ -92,7 +105,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 					<div>
 						<img
 							className=" max-h-[calc(100vh-10rem)]"
-							src={getLetterImageUrl(selectedLetter.date, "enveloppeVerso")}
+							src={getSelectedLetterImageUrl(1)}
 						/>
 					</div>
 				</ReactCardFlip>
@@ -114,6 +127,8 @@ const LetterImage: React.FC<LetterImageProps> = ({
 					imageUrl="vectors/text.svg"
 					onClick={() => handleTextVisibleButtonClick()}
 				/>
+				<ImageActionButton label="<<" onClick={() => handlePrevPhotoClick()} />
+				<ImageActionButton label=">>" onClick={() => handleNextPhotoClick()} />
 			</div>
 		</div>
 	) : null

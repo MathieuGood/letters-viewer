@@ -9,20 +9,21 @@ interface LeftPanelProps {
 	setSelectedLetterIndex: React.Dispatch<React.SetStateAction<number | null>>
 	setIsLeftPanelVisible: React.Dispatch<React.SetStateAction<boolean>>
 	setIsTextVisible: React.Dispatch<React.SetStateAction<boolean>>
+	setSelectedPhotoIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
 const LeftPanel: React.FC<LeftPanelProps> = ({
 	isLeftPanelVisible,
 	setSelectedLetterIndex,
 	setIsLeftPanelVisible,
-	setIsTextVisible
+	setIsTextVisible,
+	setSelectedPhotoIndex
 }) => {
 	const handleDateClick = (index: number) => {
 		setSelectedLetterIndex(index)
+		setSelectedPhotoIndex(0)
 		setIsLeftPanelVisible(false)
 		setIsTextVisible(false)
-		// Set imageType/imageIndex to first image
-
 	}
 
 	const fallAnimationProps = useSpring({
@@ -50,7 +51,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({
 					{yearTitle}
 					<li
 						className="cursor-pointer ml-2 hover:font-typewriterblack hover:text-neutral-700"
-						key={index}
+						key={`letter-index-index`}
 						onClick={() => handleDateClick(index)}>
 						{formatDateToFrench(letter.date.toString())}
 					</li>

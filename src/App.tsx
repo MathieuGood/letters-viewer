@@ -6,9 +6,16 @@ import LetterText from "./components/LetterText"
 import HomeContent from "./components/HomeContent"
 
 const App: React.FC = () => {
+	// selectedPhotoIndex = 0: enveloppeRecto
+	// selectedPhotoIndex = 1: enveloppeVerso
+	// selectedPhotoIndex = 2: enveloppeOuverte
+	// selectedPhotoIndex = 3: lettreRecto
+	// selectedPhotoIndex = 4: lettreOuverte
+	// selectedPhotoIndex = 5: lettreVerso
+
 	const [selectedLetterIndex, setSelectedLetterIndex] = useState<number | null>(null)
 	const [isLeftPanelVisible, setIsLeftPanelVisible] = useState(false)
-	// const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null)
+	const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number>(0)
 	const [selectedImageType, setSelectedImageType] = useState<string>("enveloppeRecto")
 	const [isTextVisisible, setIsTextVisible] = useState<boolean>(false)
 	const selectedLetter = selectedLetterIndex !== null ? letters[selectedLetterIndex] : null
@@ -46,12 +53,15 @@ const App: React.FC = () => {
 				setSelectedLetterIndex={setSelectedLetterIndex}
 				setIsLeftPanelVisible={setIsLeftPanelVisible}
 				setIsTextVisible={setIsTextVisible}
+				setSelectedPhotoIndex={setSelectedPhotoIndex}
 			/>
 
 			<LetterImage
 				selectedLetter={selectedLetter}
 				selectedImageType={selectedImageType}
 				setSelectedImageType={setSelectedImageType}
+				selectedPhotoIndex={selectedPhotoIndex}
+				setSelectedPhotoIndex={setSelectedPhotoIndex}
 				isTextVisible={isTextVisisible}
 				setIsTextVisible={setIsTextVisible}
 			/>
