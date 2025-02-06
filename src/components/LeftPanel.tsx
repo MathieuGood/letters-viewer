@@ -1,7 +1,7 @@
 import letters from "../data/letters.json"
 import { Letter } from "../interfaces/Letter"
 import { animated, useSpring } from "@react-spring/web"
-import { formatDateToFrench } from "../utils/dateUtils"
+import FullYearDatesList from "./FullYearDatesList"
 
 interface LeftPanelProps {
 	isLeftPanelVisible: boolean
@@ -32,39 +32,46 @@ const LeftPanel: React.FC<LeftPanelProps> = ({
 		config: { tension: 300, friction: 35 }
 	})
 
-	const dateListEntries = (letters: Letter[]) => {
-		let lastYear: string | null = null
-		return letters.map((letter, index) => {
-			const year = new Date(letter.date).getFullYear().toString()
-			const yearTitle =
-				year !== lastYear || index === 0 ? (
-					<li key={`year-${year}`} className="font-typewriterblack text-xl mt-4 mb-1">
-						{year}
-					</li>
-				) : null
-			if (year !== lastYear || index === 0) {
-				lastYear = year
+	const lettersByYear = (letters: Letter[]) => {
+		const years: Letter[][] = []
+		let currentYear: number | null = null
+		let currentYearArray: Letter[] = []
+		letters.forEach((letter, index) => {
+			letter.index = index
+			const year = new Date(letter.date).getFullYear()
+			if (currentYear === null) {
+				currentYear = year
 			}
-
-			return (
-				<>
-					{yearTitle}
-					<li
-						className="cursor-pointer ml-2 hover:font-typewriterblack hover:text-neutral-700"
-						key={`letter-index-index`}
-						onClick={() => handleDateClick(index)}>
-						{formatDateToFrench(letter.date.toString())}
-					</li>
-				</>
-			)
+			if (year === currentYear) {
+				currentYearArray.push(letter)
+			} else {
+				years.push(currentYearArray)
+				currentYearArray = [letter]
+				currentYear = year
+			}
 		})
+		years.push(currentYearArray)
+		return years
 	}
 
 	return isLeftPanelVisible ? (
 		<animated.div
-			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-32 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll"
+			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-32 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll scrollbar-hidden"
 			style={fallAnimationProps}>
-			<ul>{dateListEntries(letters)}</ul>
+			<ul>
+				{lettersByYear(letters).map((yearLetters: Letter[], index: number) => (
+					<FullYearDatesList
+						key={`year-${index}`}
+						letters={yearLetters}
+						handleDateClick={handleDateClick}
+					/>
+				))}
+				{letters.map((letter, index) => {
+					console.log(index, letter)
+
+					return null
+				})}
+			</ul>
 		</animated.div>
 	) : null
 }

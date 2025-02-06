@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 
 letters
+folder
 letters.json
 deploy

@@ -86,15 +86,15 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	}
 
 	return selectedLetter ? (
-		<div className="flex flex-col justify-end w-2/3">
-			<div className=" flex items-end justify-center">
+		<div className="flex flex-col justify-center w-full">
+			<div className="flex justify-center">
 				<ReactCardFlip
 					isFlipped={isEnveloppeFlipped}
 					flipDirection="horizontal"
-					containerClassName=" max-h-screen cursor-pointer">
+					containerClassName="max-h-screen cursor-pointer">
 					<animated.div style={fallDownAnimationProps}>
 						<img
-							className=" max-h-[calc(100vh-10rem)]"
+							className=" max-h-[calc(100vh-10rem)] w-[600px] object-contain"
 							src={getSelectedLetterImageUrl(selectedPhotoIndex)}
 							onClick={() => {
 								handleImageClick()

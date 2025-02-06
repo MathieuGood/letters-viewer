@@ -1,4 +1,5 @@
 export interface Letter {
+	index?: number
 	date: Date | string
 	sp: string
 	paragraphs: string[]
