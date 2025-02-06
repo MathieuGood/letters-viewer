@@ -2,6 +2,8 @@ import letters from "../data/letters.json"
 import { Letter } from "../interfaces/Letter"
 import { animated, useSpring } from "@react-spring/web"
 import FullYearDatesList from "./FullYearDatesList"
+import { useMemo } from "react"
+import { lettersByYear } from "../utils/letterUtils"
 
 interface LeftPanelProps {
 	isLeftPanelVisible: boolean
@@ -32,34 +34,14 @@ const LeftPanel: React.FC<LeftPanelProps> = ({
 		config: { tension: 300, friction: 35 }
 	})
 
-	const lettersByYear = (letters: Letter[]) => {
-		const years: Letter[][] = []
-		let currentYear: number | null = null
-		let currentYearArray: Letter[] = []
-		letters.forEach((letter, index) => {
-			letter.index = index
-			const year = new Date(letter.date).getFullYear()
-			if (currentYear === null) {
-				currentYear = year
-			}
-			if (year === currentYear) {
-				currentYearArray.push(letter)
-			} else {
-				years.push(currentYearArray)
-				currentYearArray = [letter]
-				currentYear = year
-			}
-		})
-		years.push(currentYearArray)
-		return years
-	}
+	const groupedLettersByYear = useMemo(() => lettersByYear(letters), [])
 
 	return isLeftPanelVisible ? (
 		<animated.div
 			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-32 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll scrollbar-hidden"
 			style={fallAnimationProps}>
 			<ul>
-				{lettersByYear(letters).map((yearLetters: Letter[], index: number) => (
+				{groupedLettersByYear.map((yearLetters: Letter[], index: number) => (
 					<FullYearDatesList
 						key={`year-${index}`}
 						letters={yearLetters}

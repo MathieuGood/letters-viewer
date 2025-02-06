@@ -27,3 +27,5 @@ letters
 folder
 letters.json
 deploy
+
+*.tar
