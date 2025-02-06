@@ -17,11 +17,11 @@ const FullYearDatesList: React.FC<FullYearDatesProps> = ({ letters, handleDateCl
 
 	return (
 		<div>
-			<h1
-				className="cursor-pointer font-typewriterblack text-xl mt-4 mb-1"
+			<h2
+				className="cursor-pointer font-typewriterblack text-xl mt-4 mb-1 hover:drop-shadow-[0_7px_2px_rgba(255,255,255,0.9)]"
 				onClick={() => handleYearClick()}>
 				{year}
-			</h1>
+			</h2>
 			{isDatesVisible &&
 				letters.map((letter, index) => (
 					<div
