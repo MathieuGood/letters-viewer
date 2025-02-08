@@ -10,16 +10,16 @@ interface LetterImageProps {
 	setSelectedImageType: React.Dispatch<React.SetStateAction<string>>
 	selectedPhotoIndex: number
 	setSelectedPhotoIndex: React.Dispatch<React.SetStateAction<number>>
-	isTextVisible: boolean
-	setIsTextVisible: React.Dispatch<React.SetStateAction<boolean>>
+	isTranscript: boolean
+	setIsTranscriptVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LetterImage: React.FC<LetterImageProps> = ({
 	selectedLetter,
 	selectedPhotoIndex,
 	setSelectedPhotoIndex,
-	isTextVisible,
-	setIsTextVisible
+	isTranscript: isTranscriptVisible,
+	setIsTranscriptVisible: setIsTranscriptVisible
 }) => {
 	const [isEnveloppeFlipped, setIsFlippedEnveloppe] = useState(false)
 
@@ -58,10 +58,10 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	})
 
 	const handleTextVisibleButtonClick = () => {
-		if (isTextVisible) {
-			setIsTextVisible(false)
+		if (isTranscriptVisible) {
+			setIsTranscriptVisible(false)
 		} else {
-			setIsTextVisible(true)
+			setIsTranscriptVisible(true)
 		}
 	}
 

@@ -17,7 +17,7 @@ const App: React.FC = () => {
 	const [isLeftPanelVisible, setIsLeftPanelVisible] = useState(false)
 	const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number>(0)
 	const [selectedImageType, setSelectedImageType] = useState<string>("enveloppeRecto")
-	const [isTextVisisible, setIsTextVisible] = useState<boolean>(false)
+	const [isTranscriptVisible, setIsTranscriptVisible] = useState<boolean>(false)
 	const selectedLetter = selectedLetterIndex !== null ? letters[selectedLetterIndex] : null
 
 	const handleShowListButtonClick = () => {
@@ -39,10 +39,10 @@ const App: React.FC = () => {
 			{selectedLetter === null && <HomeContent />}
 
 			{/* Menu icon */}
-			<div className="menu-icon absolute top-4 left-4">
+			<div className="menu-icon absolute top-4 left-6">
 				<img
-					src="images/books.png"
-					className="w-full h-24 cursor-pointer hover:-rotate-12"
+					src="images/folder/folder_open.png"
+					className="w-full h-28 cursor-pointer hover:-rotate-3"
 					onClick={() => handleShowListButtonClick()}
 				/>
 			</div>
@@ -52,7 +52,7 @@ const App: React.FC = () => {
 				selectedLetterIndex={selectedLetterIndex}
 				setSelectedLetterIndex={setSelectedLetterIndex}
 				setIsLeftPanelVisible={setIsLeftPanelVisible}
-				setIsTextVisible={setIsTextVisible}
+				setIsTextVisible={setIsTranscriptVisible}
 				setSelectedPhotoIndex={setSelectedPhotoIndex}
 			/>
 
@@ -62,11 +62,11 @@ const App: React.FC = () => {
 				setSelectedImageType={setSelectedImageType}
 				selectedPhotoIndex={selectedPhotoIndex}
 				setSelectedPhotoIndex={setSelectedPhotoIndex}
-				isTextVisible={isTextVisisible}
-				setIsTextVisible={setIsTextVisible}
+				isTranscript={isTranscriptVisible}
+				setIsTranscriptVisible={setIsTranscriptVisible}
 			/>
 
-			<LetterText isTextVisible={isTextVisisible} selectedLetter={selectedLetter} />
+			<LetterText isTextVisible={isTranscriptVisible} selectedLetter={selectedLetter} />
 		</div>
 	)
 }

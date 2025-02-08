@@ -38,7 +38,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({
 
 	return isLeftPanelVisible ? (
 		<animated.div
-			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-32 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll scrollbar-hidden"
+			className="bg-[rgba(255,255,255,0.5)] rounded-xl min-w-28 w-52 px-4 z-50 absolute top-36 left-6 animate-fade-in max-h-[calc(100%-10rem)] overflow-y-scroll scrollbar-hidden"
 			style={fallAnimationProps}>
 			<ul>
 				{groupedLettersByYear.map((yearLetters: Letter[], index: number) => (
