@@ -23,6 +23,12 @@ const LetterImage: React.FC<LetterImageProps> = ({
 }) => {
 	const [isEnveloppeFlipped, setIsFlippedEnveloppe] = useState(false)
 
+	const fallDownAnimationProps = useSpring({
+		from: { transform: "translateY(-100vh)" },
+		to: { transform: "translateY(0)" },
+		config: { tension: 300, friction: 90 }
+	})
+
 	const getSelectedLetterImageUrl = (selectedPhotoIndex: number) => {
 		if (
 			selectedLetter?.images &&
@@ -51,12 +57,6 @@ const LetterImage: React.FC<LetterImageProps> = ({
 		}
 	}
 
-	const fallDownAnimationProps = useSpring({
-		from: { transform: "translateY(-100vh)" },
-		to: { transform: "translateY(0)" },
-		config: { tension: 300, friction: 90 }
-	})
-
 	const handleTextVisibleButtonClick = () => {
 		if (isTranscriptVisible) {
 			setIsTranscriptVisible(false)
@@ -70,16 +70,23 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	}
 
 	const handlePrevPhotoClick = () => {
-		if (selectedPhotoIndex > 3) {
+		if (selectedPhotoIndex === 1) return
+		
+		if (selectedPhotoIndex === 2) {
+			setSelectedPhotoIndex(0)
+		} else if (selectedPhotoIndex > 2) {
 			setSelectedPhotoIndex(selectedPhotoIndex - 1)
 		}
 	}
 
 	const handleNextPhotoClick = () => {
-		if (
+		if (selectedPhotoIndex === 1) return
+
+		if (selectedPhotoIndex === 0) {
+			setSelectedPhotoIndex(2)
+		} else if (
 			selectedLetter?.images &&
-			selectedPhotoIndex < selectedLetter.images.length - 1 &&
-			selectedPhotoIndex > 2
+			selectedPhotoIndex < selectedLetter.images.length - 1
 		) {
 			setSelectedPhotoIndex(selectedPhotoIndex + 1)
 		}
