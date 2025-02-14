@@ -19,6 +19,7 @@ const App: React.FC = () => {
 	const [selectedImageType, setSelectedImageType] = useState<string>("enveloppeRecto")
 	const [isTranscriptVisible, setIsTranscriptVisible] = useState<boolean>(false)
 	const selectedLetter = selectedLetterIndex !== null ? letters[selectedLetterIndex] : null
+	const [isMenuIconVisible, setIsMenuIconVisible] = useState(false)
 
 	const handleShowListButtonClick = () => {
 		if (!isLeftPanelVisible) {
@@ -36,16 +37,21 @@ const App: React.FC = () => {
 				className="absolute inset-0 w-full h-full object-cover -z-10"
 			/>
 
-			{selectedLetter === null && <HomeContent />}
+			<HomeContent
+				setIsMenuIconVisible={setIsMenuIconVisible}
+				setIsLeftPanelVisible={setIsLeftPanelVisible}
+			/>
 
 			{/* Menu icon */}
-			<div className="menu-icon absolute top-4 left-6">
-				<img
-					src="images/folder/folder_open.png"
-					className="w-full h-28 cursor-pointer hover:-rotate-3 animate-fade-in"
-					onClick={() => handleShowListButtonClick()}
-				/>
-			</div>
+			{isMenuIconVisible && (
+				<div className="menu-icon absolute top-4 left-6">
+					<img
+						src="images/folder/folder_open.png"
+						className="w-full h-28 cursor-pointer hover:-rotate-3 animate-fade-in-5s"
+						onClick={() => handleShowListButtonClick()}
+					/>
+				</div>
+			)}
 
 			<LeftPanel
 				isLeftPanelVisible={isLeftPanelVisible}

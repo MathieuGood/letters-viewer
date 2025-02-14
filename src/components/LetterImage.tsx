@@ -71,7 +71,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 
 	const handlePrevPhotoClick = () => {
 		if (selectedPhotoIndex === 1) return
-		
+
 		if (selectedPhotoIndex === 2) {
 			setSelectedPhotoIndex(0)
 		} else if (selectedPhotoIndex > 2) {
