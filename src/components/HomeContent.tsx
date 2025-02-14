@@ -34,11 +34,11 @@ const HomeContent: React.FC<{
 							console.log(e)
 							if (e.data === 2) handleOnFlip(e)
 						}}>
-						<div className="flex flex-col  justify-center items-center gap-0 text-2xl">
+						<div className="ml-24 mt-28 flex flex-col-reverse text-2xl">
 							<p className="pt-14">Ouvrez-moi</p>
 							<img
 								src="vectors/arrow-right.svg"
-								className="mt-8 ml-9 w-10 animate-bounce"
+								className="mt-8 ml-20 w-10 animate-bounce"
 							/>
 						</div>
 						<img
