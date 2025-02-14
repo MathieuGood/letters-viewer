@@ -111,7 +111,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 
 					<div>
 						<img
-							className=" max-h-[calc(100vh-10rem)]"
+							className=" max-h-[calc(100vh-10rem)] w-[600px] object-contain"
 							src={getSelectedLetterImageUrl(1)}
 						/>
 					</div>

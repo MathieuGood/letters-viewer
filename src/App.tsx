@@ -42,7 +42,7 @@ const App: React.FC = () => {
 			<div className="menu-icon absolute top-4 left-6">
 				<img
 					src="images/folder/folder_open.png"
-					className="w-full h-28 cursor-pointer hover:-rotate-3"
+					className="w-full h-28 cursor-pointer hover:-rotate-3 animate-fade-in"
 					onClick={() => handleShowListButtonClick()}
 				/>
 			</div>
