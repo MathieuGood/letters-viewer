@@ -1,7 +1,6 @@
 import { Letter } from "../interfaces/Letter"
 
 export const lettersByYear = (letters: Letter[]) => {
-	console.log("lettersByYear triggered")
 	const years: Letter[][] = []
 	let currentYear: number | null = null
 	let currentYearArray: Letter[] = []
