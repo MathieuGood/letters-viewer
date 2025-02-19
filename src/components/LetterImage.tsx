@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactCardFlip from "react-card-flip"
 import { useSpring, animated } from "@react-spring/web"
 import { Letter } from "../interfaces/Letter"
 import ImageActionButton from "./ImageActionButton"
+import GlassZoom from "react-glass-zoom"
 
 interface LetterImageProps {
 	selectedLetter: Letter | null
@@ -22,6 +23,15 @@ const LetterImage: React.FC<LetterImageProps> = ({
 	setIsTranscriptVisible: setIsTranscriptVisible
 }) => {
 	const [isEnveloppeFlipped, setIsFlippedEnveloppe] = useState(false)
+	const [imageWidthClass, setImageWidthClass] = useState("w-[400px]")
+
+	useEffect(() => {
+		if ([0, 1, 2, 3].includes(selectedPhotoIndex)) {
+			setImageWidthClass("w-[400px]")
+		} else {
+			setImageWidthClass("w-[800px]")
+		}
+	}, [selectedPhotoIndex])
 
 	const fallDownAnimationProps = useSpring({
 		from: { transform: "translateY(-100vh)" },
@@ -101,7 +111,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 					containerClassName="max-h-screen cursor-pointer">
 					<animated.div style={fallDownAnimationProps}>
 						<img
-							className=" max-h-[calc(100vh-10rem)] w-[600px] object-contain"
+							className={`max-h-[calc(100vh-10rem)] object-contain ${imageWidthClass}`}
 							src={getSelectedLetterImageUrl(selectedPhotoIndex)}
 							onClick={() => {
 								handleImageClick()
@@ -121,7 +131,7 @@ const LetterImage: React.FC<LetterImageProps> = ({
 			<div className=" flex justify-center gap-3 mt-4">
 				<ImageActionButton
 					label="Retourner"
-					imageUrl="vectors/flip.svg"
+					imageUrl="vectors/arrow-flip.svg"
 					onClick={() => handleFlipButtonClick()}
 				/>
 				<ImageActionButton
