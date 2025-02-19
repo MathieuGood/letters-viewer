@@ -3,7 +3,6 @@ import ReactCardFlip from "react-card-flip"
 import { useSpring, animated } from "@react-spring/web"
 import { Letter } from "../interfaces/Letter"
 import ImageActionButton from "./ImageActionButton"
-import GlassZoom from "react-glass-zoom"
 
 interface LetterImageProps {
 	selectedLetter: Letter | null
