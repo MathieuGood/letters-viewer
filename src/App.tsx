@@ -30,7 +30,7 @@ const App: React.FC = () => {
 	}
 
 	return (
-		<div className="w-screen h-screen flex p-5 font-typerwriter pl-20">
+		<div className="w-screen h-screen flex p-5 font-typerwriter">
 			{/* Background image */}
 			<img
 				src="images/backgroundLight.png"
